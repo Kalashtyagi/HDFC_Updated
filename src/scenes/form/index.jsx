@@ -1,6 +1,3 @@
-
-
-
 import { Box, Button, TextField } from "@mui/material";
 import { Grid } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -30,14 +27,14 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const Form = () => {
   const AdminId = sessionStorage.getItem("userId");
-  const AdminEmail=sessionStorage.getItem('AdminEmail')
+  const AdminEmail = sessionStorage.getItem("AdminEmail");
   const { isDark } = useContext(DarkContext);
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const { isCollapsed } = useContext(SidebarContext);
   const [loading, setLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
-  const[selectImage,setSelectImage]=useState('');
-  
+  const [selectImage, setSelectImage] = useState("");
+
   const {
     register,
     formState: { errors },
@@ -45,40 +42,33 @@ const Form = () => {
     reset,
   } = useForm({
     defaultValues: {
-      merchantType: "", 
+      merchantType: "",
     },
   });
   const handleImage = (e) => {
     const file = e.target.files[0];
     setSelectImage(file);
-
   };
-
 
   const onSubmit = async (data) => {
     setLoading(true);
-   
-    const formData=new FormData();
-    formData.append("caseOwner",AdminId);
-    formData.append("creatorEmailID",AdminEmail);
-    formData.append("status",true);
-    formData.append("dbaName",data.dbaName);
-    formData.append("email",data.email);
-    formData.append("leagalName",data.leagalName);
-    formData.append("merchantType",data.merchantType);
-    formData.append("image",selectImage);
+
+    const formData = new FormData();
+    formData.append("caseOwner", AdminId);
+    formData.append("creatorEmailID", AdminEmail);
+    formData.append("status", true);
+    formData.append("dbaName", data.dbaName);
+    formData.append("email", data.email);
+    formData.append("leagalName", data.leagalName);
+    formData.append("merchantType", data.merchantType);
+    formData.append("image", selectImage);
     try {
-      const response = await axios.post(
-        `${BASE_URL}createMerchant`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-         
-        }
-      );
-      console.log("response",response)
+      const response = await axios.post(`${BASE_URL}createMerchant`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log("response", response);
 
       if (response?.status == 200) {
         const responseData = await response?.data;
@@ -86,8 +76,7 @@ const Form = () => {
         toast.success(responseData?.message);
         reset();
         setLoading(false);
-
-      } 
+      }
     } catch (error) {
       console.error("API Error:", error);
       toast.error("something went wrong");
@@ -124,7 +113,7 @@ const Form = () => {
       formData.append("file", selectedFile);
 
       const response = await axios.post(
-        $`{BASE_URL}BulkUploadMerchan`,
+        `${BASE_URL}BulkUploadMerchan`,
         formData,
         {
           headers: {
@@ -294,7 +283,6 @@ const Form = () => {
                       color: isDark ? "black" : "white",
                     },
                   }}
-                
                 />
 
                 <Box sx={{ gridColumn: "span 2" }}>
@@ -338,14 +326,18 @@ const Form = () => {
                 </Box>
               </Box>
               <Box display="flex" justifyContent="center" mt="20px">
-                <Button type="submit" color="secondary" variant="contained"disabled={loading}>
+                <Button
+                  type="submit"
+                  color="secondary"
+                  variant="contained"
+                  disabled={loading}
+                >
                   Create New Merchant
                 </Button>
               </Box>
             </form>
           </AccordionDetails>
         </Accordion>
-
       </Box>
       <Box
         m="20px"
@@ -373,50 +365,53 @@ const Form = () => {
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
-           
             <Grid container spacing={3}>
-                <Grid item sx={4}>
-                  <Button
-                    component="label"
-                    variant="contained"
-                    startIcon={<CloudUploadIcon />}
-                    style={{
-                      fontSize: "20px",
-                      color: "blueviolet",
-                      backgroundColor: "white",
-                      height: "40px",
-                    }}
-                  >
-                    Select file
-                    <VisuallyHiddenInput
-                      type="file"
-                      onChange={handleFileChange}
-                    />
-                  </Button>
-                  <p>Accept only xls or xlsx</p>
-                  <p style={{ color: "#03c6a1" }}>
-                    {selectedFile ? selectedFile.name : "No file selected"}
-                  </p>
-                </Grid>
-                <Grid item sx={4}>
-                 
-                  <Button type="submit" color="secondary" variant="contained" size="large"onClick={handleUpload}>
-                    Upload
-                  </Button>
-                </Grid>
-                <Grid item xs={2} >
-                  <Button variant="contained" color="success" size="small">
-                    <DownloadIcon fontSize="large" />
-                    Download Sample
-                  </Button>
-                </Grid>
+              <Grid item sx={4}>
+                <Button
+                  component="label"
+                  variant="contained"
+                  startIcon={<CloudUploadIcon />}
+                  style={{
+                    fontSize: "20px",
+                    color: "blueviolet",
+                    backgroundColor: "white",
+                    height: "40px",
+                  }}
+                >
+                  Select file
+                  <VisuallyHiddenInput
+                    type="file"
+                    onChange={handleFileChange}
+                  />
+                </Button>
+                <p>Accept only xls or xlsx</p>
+                <p style={{ color: "#03c6a1" }}>
+                  {selectedFile ? selectedFile.name : "No file selected"}
+                </p>
               </Grid>
+              <Grid item sx={4}>
+                <Button
+                  type="submit"
+                  color="secondary"
+                  variant="contained"
+                  size="large"
+                  onClick={handleUpload}
+                >
+                  Upload
+                </Button>
+              </Grid>
+              <Grid item xs={2}>
+                <Button variant="contained" color="success" size="small">
+                  <DownloadIcon fontSize="large" />
+                  Download Sample
+                </Button>
+              </Grid>
+            </Grid>
           </AccordionDetails>
         </Accordion>
-
       </Box>
-       
-        <ToastContainer position="top-center" />
+
+      <ToastContainer position="top-center" />
     </>
   );
 };

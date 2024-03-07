@@ -1,0 +1,126 @@
+.adminLog {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  height: 350px;
+  width: 400px;
+  overflow-y: auto;
+}
+.adminLog p:hover {
+  transform: scale(1.2);
+  color: rgb(207, 215, 222);
+}
+
+.adminLog::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+.adminLog::-webkit-scrollbar-track {
+  background-color: #f5f5f5;
+}
+
+.adminLog::-webkit-scrollbar-thumb {
+  background-color: #000000;
+}
+@media (max-width: 1500px) {
+  .adminLog {
+    height: 350px;
+    width: 380px;
+  }
+}
+
+@media (max-width: 1450px) {
+  .adminLog {
+    height: 350px;
+    width: 350px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .adminLog {
+    height: 250px;
+    width: 250px;
+  }
+}
+
+@media (max-width: 1380px) {
+  .adminLog {
+    height: 280px;
+    width: 250px;
+  }
+}
+
+.merchantLog {
+  position: fixed;
+  top: 450px;
+  right: 20px;
+  height: 350px;
+  width: 400px;
+  overflow-y: auto;
+}
+
+.merchantLog p:hover {
+  transform: scale(1.2);
+  color: rgb(207, 215, 222);
+}
+
+.merchantLog::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+.merchantLog::-webkit-scrollbar-track {
+  background-color: #f5f5f5;
+}
+
+.merchantLog::-webkit-scrollbar-thumb {
+  background-color: #000000;
+}
+@media (max-width: 1500px) {
+  .merchantLog {
+    height: 300px;
+    width: 380px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .merchantLog {
+    height: 250px;
+    width: 250px;
+  }
+}
+@media (max-width: 1450px) {
+  .merchantLog {
+    height: 300px;
+    width: 350px;
+  }
+}
+@media (max-width: 1380px) {
+  .merchantLog {
+    height: 280px;
+    width: 250px;
+  }
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  width: 842px;
+}
+
+@media (max-width: 1554px) {
+  .header {
+    /* border: 2px solid yellow; */
+    width: 52%;
+  }
+}
+@media (max-width: 1160px) {
+  .header {
+    /* border: 2px solid yellow; */
+    width: 45%;
+  }
+}
+.popUp {
+  cursor: pointer;
+  margin-left: 50px;
+}
